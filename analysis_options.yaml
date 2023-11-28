@@ -1,0 +1,8 @@
+include: package:flutter_lints/flutter.yaml
+
+linter:
+  rules:
+    - prefer_const_declarations:
+      errors:
+        sort_pub_dependencies: true
+        invalid_annotation_target: ignore
