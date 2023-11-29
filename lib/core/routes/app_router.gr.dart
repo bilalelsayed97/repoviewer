@@ -12,9 +12,9 @@ import 'package:auto_route/auto_route.dart' as _i5;
 import 'package:flutter/material.dart' as _i6;
 import 'package:repoviewr/auth/presentation/authorization_page.dart' as _i1;
 import 'package:repoviewr/auth/presentation/sign_in_page.dart' as _i2;
-import 'package:repoviewr/splash/presentation/splash_page.dart' as _i3;
-import 'package:repoviewr/starred_repos/presentation/starred_repos_page.dart'
+import 'package:repoviewr/github/repos/starred_repos/presentation/starred_repos_page.dart'
     as _i4;
+import 'package:repoviewr/splash/presentation/splash_page.dart' as _i3;
 
 abstract class $AppRouter extends _i5.RootStackRouter {
   $AppRouter({super.navigatorKey});

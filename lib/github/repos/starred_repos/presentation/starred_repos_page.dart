@@ -22,7 +22,7 @@ class StarredReposPage extends StatelessWidget {
                     return false;
                   });
                 },
-                child: Text('sign out'))
+                child: const Text('sign out'))
           ],
         ),
       ),
