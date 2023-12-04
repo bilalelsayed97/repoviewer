@@ -31,7 +31,7 @@ class SplashPage extends StatelessWidget {
               });
             });
       },
-      child: Scaffold(
+      child: const Scaffold(
         body: SplashBody(),
       ),
     );

@@ -85,16 +85,15 @@ class GithubAuthenticator {
   }
 
   Future<Either<AuthFailure, Unit>> signOut() async {
-    final accessToken = await _credentialsStorage
-        .read()
-        .then((credentials) => credentials?.accessToken);
-
-    final usernameAndPassword =
-        stringToBase64.encode('$clientId:$clientSecret');
-
     try {
+      final accessToken = await _credentialsStorage
+          .read()
+          .then((credentials) => credentials?.accessToken);
+
+      final usernameAndPassword =
+          stringToBase64.encode('$clientId:$clientSecret');
       try {
-        _dio.deleteUri(
+        await _dio.deleteUri(
           revokationEndpoint,
           data: {
             'access_token': accessToken,
@@ -110,6 +109,14 @@ class GithubAuthenticator {
           rethrow;
         }
       }
+      return clearCredentialsStroage();
+    } on PlatformException {
+      return left(const AuthFailure.storage());
+    }
+  }
+
+  Future<Either<AuthFailure, Unit>> clearCredentialsStroage() async {
+    try {
       await _credentialsStorage.clear();
       return right(unit);
     } on PlatformException {

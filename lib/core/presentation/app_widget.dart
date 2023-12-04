@@ -2,18 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/auth/application/auth_cubit/auth_cubit.dart';
 import 'package:repoviewr/core/Utility/theme.dart';
+import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 
-class AppWidget extends StatelessWidget {
+class AppWidget extends StatefulWidget {
   const AppWidget({super.key});
 
   @override
+  State<AppWidget> createState() => _AppWidgetState();
+}
+
+class _AppWidgetState extends State<AppWidget> {
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<AuthCubit>(context).checkAndUpdateStatus();
+    SembastDatabase().init();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final authCubit = BlocProvider.of<AuthCubit>(context);
-    authCubit.checkAndUpdateStatus();
-    final appRouter = authCubit.appRouter;
     return MaterialApp.router(
         title: 'Repo Viewer',
-        routerConfig: appRouter.config(),
+        routerConfig: BlocProvider.of<AuthCubit>(context).appRouter.config(),
         theme: themeData);
   }
 }
