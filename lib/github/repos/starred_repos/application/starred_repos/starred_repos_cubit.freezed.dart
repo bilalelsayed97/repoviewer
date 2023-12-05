@@ -20,7 +20,8 @@ mixin _$StarredReposState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<GithubRepo>> repos) initial,
-    required TResult Function(Fresh<List<GithubRepo>> repos) loading,
+    required TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)
+        loading,
     required TResult Function(
             Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)
         loadSuccess,
@@ -32,7 +33,7 @@ mixin _$StarredReposState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult? Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult? Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult? Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult? Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -42,7 +43,7 @@ mixin _$StarredReposState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -194,7 +195,8 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<GithubRepo>> repos) initial,
-    required TResult Function(Fresh<List<GithubRepo>> repos) loading,
+    required TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)
+        loading,
     required TResult Function(
             Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)
         loadSuccess,
@@ -209,7 +211,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult? Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult? Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult? Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult? Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -222,7 +224,7 @@ class _$InitialImpl implements Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -292,7 +294,7 @@ abstract class _$$LoadingImplCopyWith<$Res>
       __$$LoadingImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Fresh<List<GithubRepo>> repos});
+  $Res call({Fresh<List<GithubRepo>> repos, int itemsPerPage});
 
   @override
   $FreshCopyWith<List<GithubRepo>, $Res> get repos;
@@ -310,12 +312,17 @@ class __$$LoadingImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? repos = null,
+    Object? itemsPerPage = null,
   }) {
     return _then(_$LoadingImpl(
       null == repos
           ? _value.repos
           : repos // ignore: cast_nullable_to_non_nullable
               as Fresh<List<GithubRepo>>,
+      null == itemsPerPage
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -323,14 +330,16 @@ class __$$LoadingImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$LoadingImpl implements Loading {
-  const _$LoadingImpl(this.repos);
+  const _$LoadingImpl(this.repos, this.itemsPerPage);
 
   @override
   final Fresh<List<GithubRepo>> repos;
+  @override
+  final int itemsPerPage;
 
   @override
   String toString() {
-    return 'StarredReposState.loading(repos: $repos)';
+    return 'StarredReposState.loading(repos: $repos, itemsPerPage: $itemsPerPage)';
   }
 
   @override
@@ -338,11 +347,13 @@ class _$LoadingImpl implements Loading {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadingImpl &&
-            (identical(other.repos, repos) || other.repos == repos));
+            (identical(other.repos, repos) || other.repos == repos) &&
+            (identical(other.itemsPerPage, itemsPerPage) ||
+                other.itemsPerPage == itemsPerPage));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, repos);
+  int get hashCode => Object.hash(runtimeType, repos, itemsPerPage);
 
   @JsonKey(ignore: true)
   @override
@@ -354,7 +365,8 @@ class _$LoadingImpl implements Loading {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<GithubRepo>> repos) initial,
-    required TResult Function(Fresh<List<GithubRepo>> repos) loading,
+    required TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)
+        loading,
     required TResult Function(
             Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)
         loadSuccess,
@@ -362,27 +374,27 @@ class _$LoadingImpl implements Loading {
             Fresh<List<GithubRepo>> repos, GithubFailure failure)
         loadFailure,
   }) {
-    return loading(repos);
+    return loading(repos, itemsPerPage);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult? Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult? Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult? Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult? Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
         loadFailure,
   }) {
-    return loading?.call(repos);
+    return loading?.call(repos, itemsPerPage);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -390,7 +402,7 @@ class _$LoadingImpl implements Loading {
     required TResult orElse(),
   }) {
     if (loading != null) {
-      return loading(repos);
+      return loading(repos, itemsPerPage);
     }
     return orElse();
   }
@@ -434,10 +446,13 @@ class _$LoadingImpl implements Loading {
 }
 
 abstract class Loading implements StarredReposState {
-  const factory Loading(final Fresh<List<GithubRepo>> repos) = _$LoadingImpl;
+  const factory Loading(
+          final Fresh<List<GithubRepo>> repos, final int itemsPerPage) =
+      _$LoadingImpl;
 
   @override
   Fresh<List<GithubRepo>> get repos;
+  int get itemsPerPage;
   @override
   @JsonKey(ignore: true)
   _$$LoadingImplCopyWith<_$LoadingImpl> get copyWith =>
@@ -523,7 +538,8 @@ class _$LoadSuccessImpl implements LoadSuccess {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<GithubRepo>> repos) initial,
-    required TResult Function(Fresh<List<GithubRepo>> repos) loading,
+    required TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)
+        loading,
     required TResult Function(
             Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)
         loadSuccess,
@@ -538,7 +554,7 @@ class _$LoadSuccessImpl implements LoadSuccess {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult? Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult? Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult? Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult? Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -551,7 +567,7 @@ class _$LoadSuccessImpl implements LoadSuccess {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -702,7 +718,8 @@ class _$LoadFailureImpl implements LoadFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Fresh<List<GithubRepo>> repos) initial,
-    required TResult Function(Fresh<List<GithubRepo>> repos) loading,
+    required TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)
+        loading,
     required TResult Function(
             Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)
         loadSuccess,
@@ -717,7 +734,7 @@ class _$LoadFailureImpl implements LoadFailure {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult? Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult? Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult? Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult? Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
@@ -730,7 +747,7 @@ class _$LoadFailureImpl implements LoadFailure {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Fresh<List<GithubRepo>> repos)? initial,
-    TResult Function(Fresh<List<GithubRepo>> repos)? loading,
+    TResult Function(Fresh<List<GithubRepo>> repos, int itemsPerPage)? loading,
     TResult Function(Fresh<List<GithubRepo>> repos, bool isNextPageAvailable)?
         loadSuccess,
     TResult Function(Fresh<List<GithubRepo>> repos, GithubFailure failure)?
