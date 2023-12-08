@@ -22,6 +22,6 @@ class GithubHeadersCache {
   }
 
   Future<void> deleteHeaders(Uri uri) async {
-    await _store.record(uri.toString()).delete(_sembastDatabase.instance);
+    await _store.record(uri.toString()).delete(await _sembastDatabase.instance);
   }
 }

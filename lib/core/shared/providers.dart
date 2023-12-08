@@ -17,10 +17,10 @@ final getIt = GetIt.instance;
 Future<void> initLocator() async {
   getIt.registerSingleton<FlutterSecureStorage>(const FlutterSecureStorage());
 
+  getIt.registerSingleton<Dio>(Dio(), instanceName: 'dioForAuthProvider');
+
   getIt
       .registerSingleton<CredentialsStorage>(SecureCredentialsStorage(getIt()));
-
-  getIt.registerSingleton<Dio>(Dio(), instanceName: 'dioForAuthProvider');
 
   getIt.registerSingleton<GithubAuthenticator>(
       GithubAuthenticator(getIt(), getIt(instanceName: 'dioForAuthProvider')));
@@ -32,21 +32,12 @@ Future<void> initLocator() async {
   getIt.registerSingleton<GithubHeadersCache>(GithubHeadersCache(getIt()));
 
   getIt.registerSingleton<StarredReposLocalService>(
-      StarredReposLocalService(getIt()));
-
-  getIt.registerSingleton<StarredReposRepository>(
-      StarredReposRepository(getIt(), getIt()));
-
-  getIt
-      .registerSingleton<StarredReposRemoteServices>(StarredReposRemoteServices(
-    getIt(instanceName: 'dioProvider'),
-    getIt(),
-  ));
+      StarredReposLocalService(getIt<SembastDatabase>()));
 
   getIt.registerSingleton<Interceptor>(OAuth2Interceptor(
     getIt(),
     getIt(),
-    getIt(instanceName: 'dioForAuthProvider'),
+    getIt<Dio>(instanceName: 'dioForAuthProvider'),
   ));
 
   getIt.registerSingleton<Dio>(
@@ -54,8 +45,18 @@ Future<void> initLocator() async {
         ..options = BaseOptions(headers: {
           'Accept': 'application/vnd.github.v3.html+json',
         })
-        ..interceptors.add(getIt(instanceName: 'dioForAuthProvider')),
+        ..interceptors.add(getIt()),
       instanceName: 'dioProvider');
 
-  getIt.registerSingleton<StarredReposCubit>(StarredReposCubit(getIt()));
+  getIt
+      .registerSingleton<StarredReposRemoteServices>(StarredReposRemoteServices(
+    getIt(instanceName: 'dioProvider'),
+    getIt(),
+  ));
+
+  getIt.registerSingleton<StarredReposRepository>(
+      StarredReposRepository(getIt(), getIt()));
+
+  getIt.registerSingleton<StarredReposCubit>(
+      StarredReposCubit(getIt<StarredReposRepository>()));
 }

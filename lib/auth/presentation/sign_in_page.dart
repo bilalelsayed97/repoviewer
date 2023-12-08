@@ -22,11 +22,8 @@ class SignInPage extends StatelessWidget {
         state.maybeMap(
             orElse: () {},
             authenticated: (_) {
-              Future.delayed(const Duration(seconds: 1), () {
-                AutoRouter.of(context).pushAndPopUntil(
-                    const StarredReposRoute(),
-                    predicate: (route) => false);
-              });
+              AutoRouter.of(context).pushAndPopUntil(const SplashRoute(),
+                  predicate: (route) => false);
             });
       },
       builder: (context, state) {

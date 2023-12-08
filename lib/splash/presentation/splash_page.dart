@@ -18,17 +18,12 @@ class SplashPage extends StatelessWidget {
         state.maybeMap(
             orElse: () {},
             unauthenticated: (_) {
-              Future.delayed(const Duration(seconds: 1), () {
-                AutoRouter.of(context).pushAndPopUntil(const SignInRoute(),
-                    predicate: (route) => false);
-              });
+              AutoRouter.of(context).pushAndPopUntil(const SignInRoute(),
+                  predicate: (route) => false);
             },
             authenticated: (_) {
-              Future.delayed(const Duration(seconds: 1), () {
-                AutoRouter.of(context).pushAndPopUntil(
-                    const StarredReposRoute(),
-                    predicate: (route) => false);
-              });
+              AutoRouter.of(context).pushAndPopUntil(const StarredReposRoute(),
+                  predicate: (route) => false);
             });
       },
       child: const Scaffold(

@@ -16,7 +16,7 @@ class _AppWidgetState extends State<AppWidget> {
   void initState() {
     super.initState();
     BlocProvider.of<AuthCubit>(context).checkAndUpdateStatus();
-    SembastDatabase().init();
+    // SembastDatabase().init();
   }
 
   @override

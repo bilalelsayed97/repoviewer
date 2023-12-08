@@ -17,7 +17,7 @@ _$GithubHeadersImpl _$$GithubHeadersImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$GithubHeadersImplToJson(_$GithubHeadersImpl instance) =>
     <String, dynamic>{
       'etag': instance.etag,
-      'link': instance.link,
+      'link': instance.link?.toJson(),
     };
 
 _$PaginationLinkImpl _$$PaginationLinkImplFromJson(Map<String, dynamic> json) =>

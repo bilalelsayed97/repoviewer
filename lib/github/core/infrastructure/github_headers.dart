@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'github_headers.freezed.dart';
 part 'github_headers.g.dart';
 
+// @JsonSerializable(explicitToJson: true)
 @freezed
 class GithubHeaders with _$GithubHeaders {
   const GithubHeaders._();
