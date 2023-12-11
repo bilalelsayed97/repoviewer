@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:repoviewr/core/presentation/toasts.dart';
+import 'package:repoviewr/github/core/presentation/no_results_display.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/presentation/failure_repo_tile.dart';
 import 'package:repoviewr/github/repos/starred_repos/presentation/repo_tile.dart';
@@ -16,6 +18,7 @@ class PaginatedRepoListView extends StatefulWidget {
 
 class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
   bool canLoadNextPage = false;
+  bool hasAlreadyShownNoConnectionToast = false;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,14 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
         state.map(
           initial: (_) => canLoadNextPage = true,
           loading: (_) => canLoadNextPage = false,
-          loadSuccess: (_) => canLoadNextPage = _.isNextPageAvailable,
+          loadSuccess: (_) {
+            if (!_.repos.isFresh && !hasAlreadyShownNoConnectionToast) {
+              hasAlreadyShownNoConnectionToast = true;
+              showNoConnectionToast(
+                  "You're not online. Some information may be outdated.");
+            }
+            return canLoadNextPage = _.isNextPageAvailable;
+          },
           loadFailure: (_) => canLoadNextPage = false,
         );
       },
@@ -46,9 +56,14 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
             }
             return false;
           },
-          child: _PaginatedListView(
-            state: state,
-          ),
+          child: state.maybeWhen(
+            loadSuccess: (repo, _) => repo.entity.isEmpty,
+            orElse: () => false,
+          )
+              ? const NoResultsDisplay(message: 'Nothing found.')
+              : _PaginatedListView(
+                  state: state,
+                ),
         );
       },
     );

@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/auth/application/auth_cubit/auth_cubit.dart';
 import 'package:repoviewr/core/Utility/assets_data.dart';
 import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
-import 'package:repoviewr/core/routes/app_router.gr.dart';
+import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
 import 'package:svg_flutter/svg.dart';
 
 @RoutePage()

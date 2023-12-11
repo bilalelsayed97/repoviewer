@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:repoviewr/auth/domain/auth_failure.dart';
 import 'package:repoviewr/auth/infrastructure/github_authenticator.dart';
-import 'package:repoviewr/core/routes/app_router.dart';
+import 'package:repoviewr/core/presentation/routes/app_router.dart';
 
 part 'auth_state.dart';
 part 'auth_cubit.freezed.dart';

@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
 import 'package:repoviewr/core/presentation/loading_indicator.dart';
-import 'package:repoviewr/core/routes/app_router.gr.dart';
+import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
 import 'package:repoviewr/github/core/domain/github_repo.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 

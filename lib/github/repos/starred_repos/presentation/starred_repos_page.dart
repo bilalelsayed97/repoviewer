@@ -2,7 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/auth/application/auth_cubit/auth_cubit.dart';
-import 'package:repoviewr/core/routes/app_router.gr.dart';
+import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/presentation/paginated_repo_list_view.dart';
 

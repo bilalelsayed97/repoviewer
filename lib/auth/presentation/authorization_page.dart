@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:repoviewr/auth/infrastructure/github_authenticator.dart';
-import 'package:repoviewr/core/routes/app_router.gr.dart';
+import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 @RoutePage()
