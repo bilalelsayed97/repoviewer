@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class SplashLoadingIndicator extends StatelessWidget {
-  const SplashLoadingIndicator({
+class LoadingIndicator extends StatelessWidget {
+  const LoadingIndicator({
     super.key,
   });
 

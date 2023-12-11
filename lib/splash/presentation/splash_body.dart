@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:repoviewr/splash/presentation/animated_logo.dart';
 import 'package:repoviewr/splash/presentation/animated_text.dart';
-import 'package:repoviewr/splash/presentation/loading_indicator.dart';
+import 'package:repoviewr/core/presentation/loading_indicator.dart';
 
 class SplashBody extends StatelessWidget {
   const SplashBody({
@@ -22,7 +22,7 @@ class SplashBody extends StatelessWidget {
           Spacer(),
           Padding(
             padding: EdgeInsets.symmetric(vertical: 32),
-            child: SplashLoadingIndicator(),
+            child: LoadingIndicator(),
           ),
         ],
       ),

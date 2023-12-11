@@ -5,13 +5,13 @@ import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/core/shared/providers.dart';
 import 'package:repoviewr/core/observer/block_observer.dart';
 import 'package:repoviewr/core/presentation/app_widget.dart';
-import 'package:repoviewr/github/repos/starred_repos/application/starred_repos/starred_repos_cubit.dart';
+import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 
 //mateapp
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   Bloc.observer = MyBlocObserver();
-  await SembastDatabase().init();
+  await SembastDatabase.instance.initialize();
   await initLocator();
   runApp(MultiBlocProvider(
     providers: [

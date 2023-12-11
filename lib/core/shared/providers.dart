@@ -8,7 +8,7 @@ import 'package:repoviewr/auth/infrastructure/github_authenticator.dart';
 import 'package:repoviewr/auth/infrastructure/oauth2_interceptor.dart';
 import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/github/core/infrastructure/github_headers_cache.dart';
-import 'package:repoviewr/github/repos/starred_repos/application/starred_repos/starred_repos_cubit.dart';
+import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_local_service.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_remote_services.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_repository.dart';
@@ -27,7 +27,7 @@ Future<void> initLocator() async {
 
   getIt.registerSingleton<AuthCubit>(AuthCubit(getIt()));
 
-  getIt.registerSingleton<SembastDatabase>(SembastDatabase());
+  getIt.registerSingleton<SembastDatabase>(SembastDatabase.instance);
 
   getIt.registerSingleton<GithubHeadersCache>(GithubHeadersCache(getIt()));
 
@@ -42,9 +42,13 @@ Future<void> initLocator() async {
 
   getIt.registerSingleton<Dio>(
       Dio()
-        ..options = BaseOptions(headers: {
-          'Accept': 'application/vnd.github.v3.html+json',
-        })
+        ..options = BaseOptions(
+          headers: {
+            'Accept': 'application/vnd.github.v3.html+json',
+          },
+          validateStatus: (statusCode) =>
+              statusCode != null && statusCode >= 200 && statusCode < 400,
+        )
         ..interceptors.add(getIt()),
       instanceName: 'dioProvider');
 

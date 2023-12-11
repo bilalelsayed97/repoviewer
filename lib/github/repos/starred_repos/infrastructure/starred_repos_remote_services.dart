@@ -1,11 +1,13 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
-import 'package:repoviewr/core/infrastructure/dio_extensions.dart';
 import 'package:repoviewr/core/infrastructure/network_exceptions.dart';
 import 'package:repoviewr/core/infrastructure/remote_response.dart';
 import 'package:repoviewr/github/core/infrastructure/github_headers.dart';
 import 'package:repoviewr/github/core/infrastructure/github_headers_cache.dart';
 import 'package:repoviewr/github/core/infrastructure/github_repo_dto.dart';
 import 'package:repoviewr/github/core/infrastructure/pagination_config.dart';
+import 'package:http/http.dart' as http;
 
 class StarredReposRemoteServices {
   final Dio _dio;
@@ -24,6 +26,7 @@ class StarredReposRemoteServices {
     final previousHeaders = await _githubHeadersCache.getHeaders(requestUri);
 
     try {
+      await http.head(Uri.parse('https://www.google.com'));
       final response = await _dio.getUri(requestUri,
           options: Options(headers: {
             'If-None-Match': previousHeaders?.etag ?? '',
@@ -33,6 +36,7 @@ class StarredReposRemoteServices {
             maxPage: previousHeaders?.link?.maxPage ?? 0);
       } else if (response.statusCode == 200) {
         final headers = GithubHeaders.parse(response);
+
         await _githubHeadersCache.saveHeaders(requestUri, headers);
         final convertedData = (response.data as List<dynamic>)
             .map((e) => GithubRepoDTO.fromJson(e as Map<String, dynamic>))
@@ -42,11 +46,11 @@ class StarredReposRemoteServices {
       } else {
         throw RestApiException(response.statusCode);
       }
+    } on SocketException catch (_) {
+      return RemoteResponse.noConnection(
+          maxPage: previousHeaders?.link?.maxPage ?? 0);
     } on DioException catch (e) {
-      if (e.isNoConnectionError) {
-        return RemoteResponse.noConnection(
-            maxPage: previousHeaders?.link?.maxPage ?? 0);
-      } else if (e.response != null) {
+      if (e.response != null) {
         throw RestApiException(e.response?.statusCode);
       } else {
         rethrow;
