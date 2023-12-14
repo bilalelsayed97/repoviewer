@@ -49,9 +49,13 @@ abstract class $AppRouter extends _i7.RootStackRouter {
       );
     },
     SearchedReposRoute.name: (routeData) {
+      final args = routeData.argsAs<SearchedReposRouteArgs>();
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.SearchedReposPage(),
+        child: _i3.SearchedReposPage(
+          key: args.key,
+          query: args.query,
+        ),
       );
     },
     SignInRoute.name: (routeData) {
@@ -159,16 +163,40 @@ class RepoDescriptionRouteArgs {
 
 /// generated route for
 /// [_i3.SearchedReposPage]
-class SearchedReposRoute extends _i7.PageRouteInfo<void> {
-  const SearchedReposRoute({List<_i7.PageRouteInfo>? children})
-      : super(
+class SearchedReposRoute extends _i7.PageRouteInfo<SearchedReposRouteArgs> {
+  SearchedReposRoute({
+    _i8.Key? key,
+    required String query,
+    List<_i7.PageRouteInfo>? children,
+  }) : super(
           SearchedReposRoute.name,
+          args: SearchedReposRouteArgs(
+            key: key,
+            query: query,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'SearchedReposRoute';
 
-  static const _i7.PageInfo<void> page = _i7.PageInfo<void>(name);
+  static const _i7.PageInfo<SearchedReposRouteArgs> page =
+      _i7.PageInfo<SearchedReposRouteArgs>(name);
+}
+
+class SearchedReposRouteArgs {
+  const SearchedReposRouteArgs({
+    this.key,
+    required this.query,
+  });
+
+  final _i8.Key? key;
+
+  final String query;
+
+  @override
+  String toString() {
+    return 'SearchedReposRouteArgs{key: $key, query: $query}';
+  }
 }
 
 /// generated route for

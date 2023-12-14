@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/auth/application/auth_cubit/auth_cubit.dart';
 import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
+import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
 import 'package:repoviewr/github/repos/core/presentation/paginated_repo_list_view.dart';
 import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 
 @RoutePage()
 class SearchedReposPage extends StatefulWidget {
-  const SearchedReposPage({super.key});
+  final String query;
+  const SearchedReposPage({super.key, required this.query});
 
   @override
   State<SearchedReposPage> createState() => _SearchedReposPageState();
@@ -19,8 +21,8 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      BlocProvider.of<SearchedReposCubit>(context)
-          .getNextSearchedReposPage('Flutter', 1);
+      BlocProvider.of<SearchedReposCubit>(context).getNextSearchedReposPage(
+          widget.query, BlocProvider.of<PaginatedReposCubit>(context).page);
     });
   }
 
@@ -90,7 +92,8 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
           isSearch: true,
           getNextPage: (context) {
             BlocProvider.of<SearchedReposCubit>(context)
-                .getNextSearchedReposPage('Flutter', 1);
+                .getNextSearchedReposPage(widget.query,
+                    BlocProvider.of<PaginatedReposCubit>(context).page);
           },
         ),
       ),
