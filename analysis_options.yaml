@@ -6,3 +6,4 @@ linter:
       errors:
         invalid_annotation_target: ignore
         sort_pub_dependencies: true
+        invalid_use_of_protected_member: error

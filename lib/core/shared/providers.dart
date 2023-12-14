@@ -8,6 +8,10 @@ import 'package:repoviewr/auth/infrastructure/github_authenticator.dart';
 import 'package:repoviewr/auth/infrastructure/oauth2_interceptor.dart';
 import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/github/core/infrastructure/github_headers_cache.dart';
+import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
+import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
+import 'package:repoviewr/github/repos/searched_repos/infrastructure/searched_repos_remote_service.dart';
+import 'package:repoviewr/github/repos/searched_repos/infrastructure/searched_repos_repository.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_local_service.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_remote_services.dart';
@@ -61,6 +65,15 @@ Future<void> initLocator() async {
   getIt.registerSingleton<StarredReposRepository>(
       StarredReposRepository(getIt(), getIt()));
 
-  getIt.registerSingleton<StarredReposCubit>(
-      StarredReposCubit(getIt<StarredReposRepository>()));
+  getIt.registerSingleton<PaginatedReposCubit>(PaginatedReposCubit());
+
+  getIt.registerSingleton<StarredReposCubit>(StarredReposCubit(getIt()));
+
+  getIt.registerSingleton<SearchedReposRemoteService>(
+      SearchedReposRemoteService(getIt(instanceName: 'dioProvider'), getIt()));
+
+  getIt.registerSingleton<SearchedReposRepository>(
+      SearchedReposRepository(getIt()));
+
+  getIt.registerSingleton<SearchedReposCubit>(SearchedReposCubit(getIt()));
 }

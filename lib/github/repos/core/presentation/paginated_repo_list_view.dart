@@ -2,14 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/core/presentation/toasts.dart';
 import 'package:repoviewr/github/core/presentation/no_results_display.dart';
+import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
+import 'package:repoviewr/github/repos/core/presentation/failure_repo_tile.dart';
+import 'package:repoviewr/github/repos/core/presentation/repo_tile.dart';
+import 'package:repoviewr/github/repos/core/presentation/loading_repo_tile.dart';
+import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
-import 'package:repoviewr/github/repos/starred_repos/presentation/failure_repo_tile.dart';
-import 'package:repoviewr/github/repos/starred_repos/presentation/repo_tile.dart';
-import 'package:repoviewr/github/repos/starred_repos/presentation/loading_repo_tile.dart';
+
+typedef StarredRepos = BlocConsumer<StarredReposCubit, PaginatedReposState>;
+typedef SearchedRepos = BlocConsumer<SearchedReposCubit, PaginatedReposState>;
 
 class PaginatedRepoListView extends StatefulWidget {
-  const PaginatedRepoListView({
+  final void Function(BuildContext context) getNextPage;
+  bool isSearch = false;
+  PaginatedRepoListView({
     super.key,
+    required this.getNextPage,
+    required this.isSearch,
   });
 
   @override
@@ -22,7 +31,7 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<StarredReposCubit, StarredReposState>(
+    return SearchedRepos(
       listener: (context, state) {
         state.map(
           initial: (_) => canLoadNextPage = true,
@@ -39,31 +48,35 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
         );
       },
       builder: (context, state) {
-        return NotificationListener<ScrollNotification>(
-          onNotification: (notification) {
-            final metrics = notification.metrics;
-            metrics.maxScrollExtent; //1540.7 full available scroll length
-            metrics
-                .viewportDimension; //790.7 maximum length of the scroll viewed via mobile screen
-            metrics
-                .pixels; //the cureent scroll position from top the list tell the end the initial pixels = viewportDimension
-            final limit =
-                metrics.maxScrollExtent - metrics.viewportDimension / 3;
-            if (canLoadNextPage && metrics.pixels >= limit) {
-              canLoadNextPage = false;
-              BlocProvider.of<StarredReposCubit>(context)
-                  .getNextStarredReposPage();
-            }
-            return false;
+        return StarredRepos(
+          listener: (context, state) {},
+          builder: (context, state) {
+            return NotificationListener<ScrollNotification>(
+              onNotification: (notification) {
+                final metrics = notification.metrics;
+                metrics.maxScrollExtent; //1540.7 full available scroll length
+                metrics
+                    .viewportDimension; //790.7 maximum length of the scroll viewed via mobile screen
+                metrics
+                    .pixels; //the cureent scroll position from top the list tell the end the initial pixels = viewportDimension
+                final limit =
+                    metrics.maxScrollExtent - metrics.viewportDimension / 3;
+                if (canLoadNextPage && metrics.pixels >= limit) {
+                  canLoadNextPage = false;
+                  widget.getNextPage(context);
+                }
+                return false;
+              },
+              child: state.maybeWhen(
+                loadSuccess: (repo, _) => repo.entity.isEmpty,
+                orElse: () => false,
+              )
+                  ? const NoResultsDisplay(message: 'Nothing found.')
+                  : _PaginatedListView(
+                      state: state,
+                    ),
+            );
           },
-          child: state.maybeWhen(
-            loadSuccess: (repo, _) => repo.entity.isEmpty,
-            orElse: () => false,
-          )
-              ? const NoResultsDisplay(message: 'Nothing found.')
-              : _PaginatedListView(
-                  state: state,
-                ),
         );
       },
     );
@@ -71,7 +84,7 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
 }
 
 class _PaginatedListView extends StatelessWidget {
-  final StarredReposState state;
+  final PaginatedReposState state;
   const _PaginatedListView({
     super.key,
     required this.state,

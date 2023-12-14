@@ -3,28 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/auth/application/auth_cubit/auth_cubit.dart';
 import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
-import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 import 'package:repoviewr/github/repos/core/presentation/paginated_repo_list_view.dart';
+import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 
 @RoutePage()
-class StarredReposPage extends StatefulWidget {
-  const StarredReposPage({super.key});
+class SearchedReposPage extends StatefulWidget {
+  const SearchedReposPage({super.key});
 
   @override
-  State<StarredReposPage> createState() => _StarredReposPageState();
+  State<SearchedReposPage> createState() => _SearchedReposPageState();
 }
 
-class _StarredReposPageState extends State<StarredReposPage> {
+class _SearchedReposPageState extends State<SearchedReposPage> {
   @override
   void initState() {
     super.initState();
     Future.microtask(() {
-      BlocProvider.of<StarredReposCubit>(context).getNextStarredReposPage();
+      BlocProvider.of<SearchedReposCubit>(context)
+          .getNextSearchedReposPage('Flutter', 1);
     });
-    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
-    //   await BlocProvider.of<StarredReposCubit>(context)
-    //       .getNextStarredReposPage();
-    // });
   }
 
   @override
@@ -35,7 +32,7 @@ class _StarredReposPageState extends State<StarredReposPage> {
         title: const Text('Starred Repos'),
         actions: [
           IconButton(
-              onPressed: () {
+              onPressed: () async {
                 showDialog(
                     barrierColor: Colors.black.withOpacity(.5),
                     context: context,
@@ -90,12 +87,11 @@ class _StarredReposPageState extends State<StarredReposPage> {
       ),
       body: SafeArea(
         child: PaginatedRepoListView(
-          getNextPage: (context) async {
-            await BlocProvider.of<StarredReposCubit>(context)
-                .getNextStarredReposPage();
-          },
-          isSearch: false,
-        ),
+            getNextPage: (context) {
+              BlocProvider.of<SearchedReposCubit>(context)
+                  .getNextSearchedReposPage('Flutter', 1);
+            },
+            isSearch: true),
       ),
     );
   }

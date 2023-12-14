@@ -5,6 +5,8 @@ import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/core/shared/providers.dart';
 import 'package:repoviewr/core/observer/block_observer.dart';
 import 'package:repoviewr/core/presentation/app_widget.dart';
+import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
+import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
 
 //mateapp
@@ -15,11 +17,17 @@ void main() async {
   await initLocator();
   runApp(MultiBlocProvider(
     providers: [
-      BlocProvider(
+      BlocProvider<AuthCubit>(
         create: (context) => getIt.get<AuthCubit>(),
       ),
-      BlocProvider(
+      BlocProvider<StarredReposCubit>(
         create: (context) => getIt.get<StarredReposCubit>(),
+      ),
+      BlocProvider<SearchedReposCubit>(
+        create: (context) => getIt.get<SearchedReposCubit>(),
+      ),
+      BlocProvider<PaginatedReposCubit>(
+        create: (context) => getIt.get<PaginatedReposCubit>(),
       ),
     ],
     child: const AppWidget(),
