@@ -87,11 +87,12 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
       ),
       body: SafeArea(
         child: PaginatedRepoListView(
-            getNextPage: (context) {
-              BlocProvider.of<SearchedReposCubit>(context)
-                  .getNextSearchedReposPage('Flutter', 1);
-            },
-            isSearch: true),
+          isSearch: true,
+          getNextPage: (context) {
+            BlocProvider.of<SearchedReposCubit>(context)
+                .getNextSearchedReposPage('Flutter', 1);
+          },
+        ),
       ),
     );
   }

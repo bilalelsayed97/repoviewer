@@ -90,11 +90,11 @@ class _StarredReposPageState extends State<StarredReposPage> {
       ),
       body: SafeArea(
         child: PaginatedRepoListView(
+          isSearch: false,
           getNextPage: (context) async {
             await BlocProvider.of<StarredReposCubit>(context)
                 .getNextStarredReposPage();
           },
-          isSearch: false,
         ),
       ),
     );
