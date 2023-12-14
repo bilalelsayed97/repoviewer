@@ -34,19 +34,8 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
     return widget.isSearch
         ? BlocConsumer<SearchedReposCubit, PaginatedReposState>(
             listener: (context, state) {
-              state.map(
-                initial: (_) => canLoadNextPage = true,
-                loading: (_) => canLoadNextPage = false,
-                loadSuccess: (_) {
-                  if (!_.repos.isFresh && !hasAlreadyShownNoConnectionToast) {
-                    hasAlreadyShownNoConnectionToast = true;
-                    showNoConnectionToast(
-                        "You're not online. Some information may be outdated.");
-                  }
-                  return canLoadNextPage = _.isNextPageAvailable;
-                },
-                loadFailure: (_) => canLoadNextPage = false,
-              );
+              _listener(
+                  state, canLoadNextPage, hasAlreadyShownNoConnectionToast);
             },
             builder: (context, state) {
               return _notificationListener(state, canLoadNextPage, context,
@@ -57,19 +46,8 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
           )
         : BlocConsumer<StarredReposCubit, PaginatedReposState>(
             listener: (context, state) {
-              state.map(
-                initial: (_) => canLoadNextPage = true,
-                loading: (_) => canLoadNextPage = false,
-                loadSuccess: (_) {
-                  if (!_.repos.isFresh && !hasAlreadyShownNoConnectionToast) {
-                    hasAlreadyShownNoConnectionToast = true;
-                    showNoConnectionToast(
-                        "You're not online. Some information may be outdated.");
-                  }
-                  return canLoadNextPage = _.isNextPageAvailable;
-                },
-                loadFailure: (_) => canLoadNextPage = false,
-              );
+              _listener(
+                  state, canLoadNextPage, hasAlreadyShownNoConnectionToast);
             },
             builder: (context, state) {
               return _notificationListener(state, canLoadNextPage, context,
@@ -149,5 +127,25 @@ Widget _notificationListener(PaginatedReposState state, bool canLoadNextPage,
         : _PaginatedListView(
             state: state,
           ),
+  );
+}
+
+void _listener(
+  PaginatedReposState state,
+  bool canLoadNextPage,
+  bool hasAlreadyShownNoConnectionToast,
+) {
+  state.map(
+    initial: (_) => canLoadNextPage = true,
+    loading: (_) => canLoadNextPage = false,
+    loadSuccess: (_) {
+      if (!_.repos.isFresh && !hasAlreadyShownNoConnectionToast) {
+        hasAlreadyShownNoConnectionToast = true;
+        showNoConnectionToast(
+            "You're not online. Some information may be outdated.");
+      }
+      return canLoadNextPage = _.isNextPageAvailable;
+    },
+    loadFailure: (_) => canLoadNextPage = false,
   );
 }
