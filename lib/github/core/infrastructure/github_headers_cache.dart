@@ -10,19 +10,18 @@ class GithubHeadersCache {
 
   Future<void> saveHeaders(Uri uri, GithubHeaders headers) async {
     await _store.record(uri.toString()).put(
-          await _sembastDatabase.database,
+          _sembastDatabase.database,
           headers.toJson(),
         );
   }
 
   Future<GithubHeaders?> getHeaders(Uri uri) async {
-    final json = await _store
-        .record(uri.toString())
-        .get(await _sembastDatabase.database);
+    final json =
+        await _store.record(uri.toString()).get(_sembastDatabase.database);
     return json == null ? null : GithubHeaders.fromJson(json);
   }
 
   Future<void> deleteHeaders(Uri uri) async {
-    await _store.record(uri.toString()).delete(await _sembastDatabase.database);
+    await _store.record(uri.toString()).delete(_sembastDatabase.database);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:repoviewr/github/core/domain/github_failure.dart';
-import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
+import 'package:repoviewr/github/repos/core/presentation/paginated_repo_list_view.dart';
 
 class FailureRepoTile extends StatelessWidget {
   final GithubFailure failure;
@@ -32,11 +31,9 @@ class FailureRepoTile extends StatelessWidget {
           trailing: IconButton(
             icon: const Icon(Icons.refresh),
             onPressed: () {
-              BlocProvider.of<StarredReposCubit>(context)
-                  .getNextStarredReposPage();
-              // context
-              //     .findAncestorWidgetOfExactType<PaginatedRepoListView>()
-              //     ?.;
+              context
+                  .findAncestorWidgetOfExactType<PaginatedRepoListView>()
+                  ?.getNextPage(context);
             },
           ),
         ),

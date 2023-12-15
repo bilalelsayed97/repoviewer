@@ -16,7 +16,7 @@ dependencies:
   collection: ^1.18.0
   cupertino_icons: ^1.0.6
   dartz: ^0.10.1
-  dio: ^5.3.3
+  dio: ^5.4.0
   equatable: ^2.0.5
   flash: ^3.0.5+2
   flutter:
@@ -40,7 +40,9 @@ dependencies:
   svg_flutter: ^0.0.1
   url_launcher: ^6.2.1
   webview_flutter: ^4.4.2
-
+  material_floating_search_bar_2:
+    git:
+      url: https://github.com/bilalelsayed97/material_floating_search_bar.git
 dev_dependencies:
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.6

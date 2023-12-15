@@ -8,6 +8,7 @@ import 'package:repoviewr/core/presentation/app_widget.dart';
 import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
 import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
+import 'package:repoviewr/search/application/search_history_cubit/search_history_cubit.dart';
 
 //mateapp
 void main() async {
@@ -28,6 +29,9 @@ void main() async {
       ),
       BlocProvider<PaginatedReposCubit>(
         create: (context) => getIt.get<PaginatedReposCubit>(),
+      ),
+      BlocProvider<SearchHistoryCubit>(
+        create: (context) => getIt.get<SearchHistoryCubit>(),
       ),
     ],
     child: const AppWidget(),

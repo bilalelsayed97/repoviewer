@@ -26,7 +26,7 @@ class SplashPage extends StatelessWidget {
             authenticated: (_) {
               Future.delayed(const Duration(seconds: 3), () {
                 AutoRouter.of(context).pushAndPopUntil(
-                    SearchedReposRoute(query: 'flutter'),
+                    const StarredReposRoute(),
                     predicate: (route) => false);
               });
             });

@@ -15,8 +15,7 @@ class StarredReposLocalService {
     await _store
         .records(dtos.mapIndexed(
             (index, _) => index + PaginationConfig.itemsPerPage * sembastPage))
-        .put(await _sembastDatabase.database,
-            dtos.map((e) => e.toJson()).toList());
+        .put(_sembastDatabase.database, dtos.map((e) => e.toJson()).toList());
   }
 
   Future<List<GithubRepoDTO>> getPage(int page) async {

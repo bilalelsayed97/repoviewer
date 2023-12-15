@@ -14,7 +14,7 @@ class SembastDatabase {
 
   late Database _database;
 
-  Future<Database> get database async => _database;
+  Database get database => _database;
 
   Future<void> initialize() async {
     if (_hasBeenInitialised) return;

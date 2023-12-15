@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:repoviewr/core/presentation/toasts.dart';
 import 'package:repoviewr/github/core/presentation/no_results_display.dart';
 import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
@@ -55,7 +54,7 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
             builder: (context, state) {
               return _notificationListener(state, canLoadNextPage, () {
                 widget.getNextPage(context);
-              });
+              }, context);
             },
           )
         : BlocConsumer<StarredReposCubit, PaginatedReposState>(
@@ -65,7 +64,7 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
             builder: (context, state) {
               return _notificationListener(state, canLoadNextPage, () {
                 widget.getNextPage(context);
-              });
+              }, context);
             },
           );
   }
@@ -80,6 +79,8 @@ class _PaginatedListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // context.findAncestorStateOfType<FloatingSearchBarState>()?.widget.height;
+
     return ListView.builder(
       itemBuilder: (context, index) {
         return state.map(
@@ -114,8 +115,8 @@ class _PaginatedListView extends StatelessWidget {
   }
 }
 
-Widget _notificationListener(
-    PaginatedReposState state, bool canLoadNextPage, Function getNextPage) {
+Widget _notificationListener(PaginatedReposState state, bool canLoadNextPage,
+    Function getNextPage, BuildContext context) {
   return NotificationListener<ScrollNotification>(
     onNotification: (notification) {
       final metrics = notification.metrics;

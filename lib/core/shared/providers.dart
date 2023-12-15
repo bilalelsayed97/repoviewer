@@ -16,6 +16,8 @@ import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_c
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_local_service.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_remote_services.dart';
 import 'package:repoviewr/github/repos/starred_repos/infrastructure/starred_repos_repository.dart';
+import 'package:repoviewr/search/application/search_history_cubit/search_history_cubit.dart';
+import 'package:repoviewr/search/infrastructure/search_hisrory_repository.dart';
 
 final getIt = GetIt.instance;
 Future<void> initLocator() async {
@@ -76,4 +78,9 @@ Future<void> initLocator() async {
       SearchedReposRepository(getIt()));
 
   getIt.registerSingleton<SearchedReposCubit>(SearchedReposCubit(getIt()));
+
+  getIt.registerSingleton<SearchHisroryRepository>(
+      SearchHisroryRepository(getIt()));
+
+  getIt.registerSingleton<SearchHistoryCubit>(SearchHistoryCubit(getIt()));
 }

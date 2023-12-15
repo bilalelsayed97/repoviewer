@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -10,7 +11,7 @@ class LoadingRepoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Shimmer.fromColors(
         baseColor: Colors.grey.shade200,
         highlightColor: Colors.grey.shade100,
@@ -22,21 +23,22 @@ class LoadingRepoTile extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Container(
               width: context.ww * 0.4,
-              height: 14,
+              height: 12,
               decoration: BoxDecoration(
                   color: Colors.grey.shade300,
                   borderRadius: const BorderRadius.all(Radius.circular(50))),
             ),
           ),
           subtitle: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 8),
+              const Gap(8),
               Container(
                 width: context.ww * 0.8,
-                height: 28,
+                height: 32,
                 decoration: BoxDecoration(
                     color: Colors.grey.shade300,
-                    borderRadius: const BorderRadius.all(Radius.circular(50))),
+                    borderRadius: const BorderRadius.all(Radius.circular(8))),
               ),
             ],
           ),
@@ -44,9 +46,10 @@ class LoadingRepoTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               const Icon(Icons.star),
+              const Gap(8),
               Container(
-                width: context.ww * 0.09,
-                height: context.ww * 0.04,
+                width: context.ww * 0.08,
+                height: context.ww * 0.03,
                 decoration: BoxDecoration(
                     color: Colors.grey.shade300,
                     borderRadius: const BorderRadius.all(Radius.circular(50))),
