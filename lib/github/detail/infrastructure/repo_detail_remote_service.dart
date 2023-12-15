@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:repoviewr/core/infrastructure/network_exceptions.dart';
 import 'package:repoviewr/core/infrastructure/remote_response.dart';
@@ -44,8 +45,89 @@ class RepoDetailRemoteService {
       }
     } on SocketException catch (_) {
       return const RemoteResponse.noConnection();
-    } on DioException catch (_) {
-      rethrow;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  /// Returns `null` if there`s no internet connection
+  Future<bool?> getStarredStatus(String fullRepoName) async {
+    final requestUri = Uri.https(
+      'api.github.com',
+      '/user/starred/$fullRepoName',
+    );
+
+    try {
+      await http.head(Uri.parse('https://www.google.com'));
+      final response = await _dio.getUri(
+        requestUri,
+        options: Options(
+          validateStatus: (status) =>
+              (status != null && status >= 200 && status < 400) ||
+              status == 404,
+        ),
+      );
+
+      if (response.statusCode == 204) {
+        return true;
+      } else if (response.statusCode == 204) {
+        return false;
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } on SocketException catch (_) {
+      return null;
+    } on DioException catch (e) {
+      if (e.response != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
+    }
+  }
+
+  /// Returns `null` if there`s no internet connection
+  Future<Unit?> siwtchStarredStatus(String fullRepoName,
+      {required bool isCurrentlyStarred}) async {
+    final requestUri = Uri.https(
+      'api.github.com',
+      '/user/starred/$fullRepoName',
+    );
+
+    try {
+      await http.head(Uri.parse('https://www.google.com'));
+
+      final response = await (isCurrentlyStarred
+          ? _dio.deleteUri(
+              requestUri,
+              options: Options(
+                headers: {'Content-Length': 0},
+              ),
+            )
+          : _dio.putUri(
+              requestUri,
+              options: Options(
+                headers: {'Content-Length': 0},
+              ),
+            ));
+
+      if (response.statusCode == 204) {
+        return unit;
+      } else {
+        throw RestApiException(response.statusCode);
+      }
+    } on SocketException catch (_) {
+      return null;
+    } on DioException catch (e) {
+      if (e.response?.statusCode != null) {
+        throw RestApiException(e.response?.statusCode);
+      } else {
+        rethrow;
+      }
     }
   }
 }

@@ -15,11 +15,13 @@ class OAuth2Interceptor extends Interceptor {
   ) async {
     final credentials = await _authenticator.getSignedInCredentials();
     final modifiedOptions = options
-      ..headers.addAll(credentials == null
-          ? {}
-          : {
-              'Authorization': 'bearer ${credentials.accessToken}',
-            });
+      ..headers.addAll(
+        credentials == null
+            ? {}
+            : {
+                'Authorization': 'bearer ${credentials.accessToken}',
+              },
+      );
     handler.next(modifiedOptions);
   }
 
