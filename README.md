@@ -93,5 +93,5 @@ Design Patterns, SOLID Principles, Dependency injection, Responsive.
   json_serializable
 
 ##### Contact
-- [LinkedIn]([https://www.linkedin.com/in/bilalelsayed97/])
-- [Upwork]([https://www.upwork.com/freelancers/~01029ea233c076dce6])
+- [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/)
+- [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
