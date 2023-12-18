@@ -8,6 +8,10 @@ import 'package:repoviewr/auth/infrastructure/github_authenticator.dart';
 import 'package:repoviewr/auth/infrastructure/oauth2_interceptor.dart';
 import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/github/core/infrastructure/github_headers_cache.dart';
+import 'package:repoviewr/github/detail/application/repo_detail_cubit/repo_detail_cubit.dart';
+import 'package:repoviewr/github/detail/infrastructure/repo_detail_local_service.dart';
+import 'package:repoviewr/github/detail/infrastructure/repo_detail_remote_service.dart';
+import 'package:repoviewr/github/detail/infrastructure/repo_detail_repository.dart';
 import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
 import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/github/repos/searched_repos/infrastructure/searched_repos_remote_service.dart';
@@ -56,11 +60,11 @@ Future<void> initLocator() async {
               statusCode != null && statusCode >= 200 && statusCode < 400,
         )
         ..interceptors.add(getIt()),
-      instanceName: 'dioProvider');
+      instanceName: 'dioProviderWithToken');
 
   getIt
       .registerSingleton<StarredReposRemoteServices>(StarredReposRemoteServices(
-    getIt(instanceName: 'dioProvider'),
+    getIt(instanceName: 'dioProviderWithToken'),
     getIt(),
   ));
 
@@ -72,7 +76,8 @@ Future<void> initLocator() async {
   getIt.registerSingleton<StarredReposCubit>(StarredReposCubit(getIt()));
 
   getIt.registerSingleton<SearchedReposRemoteService>(
-      SearchedReposRemoteService(getIt(instanceName: 'dioProvider'), getIt()));
+      SearchedReposRemoteService(
+          getIt(instanceName: 'dioProviderWithToken'), getIt()));
 
   getIt.registerSingleton<SearchedReposRepository>(
       SearchedReposRepository(getIt()));
@@ -83,4 +88,15 @@ Future<void> initLocator() async {
       SearchHisroryRepository(getIt()));
 
   getIt.registerSingleton<SearchHistoryCubit>(SearchHistoryCubit(getIt()));
+
+  getIt.registerSingleton<RepoDetailRemoteService>(RepoDetailRemoteService(
+      getIt(instanceName: 'dioProviderWithToken'), getIt()));
+
+  getIt.registerSingleton<RepoDetailLocalService>(
+      RepoDetailLocalService(getIt(), getIt()));
+
+  getIt.registerSingleton<RepoDetailRepository>(
+      RepoDetailRepository(getIt(), getIt()));
+
+  getIt.registerSingleton<RepoDetailCubit>(RepoDetailCubit(getIt()));
 }

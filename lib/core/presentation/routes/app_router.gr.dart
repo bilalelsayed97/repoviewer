@@ -12,11 +12,10 @@ import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 import 'package:repoviewr/auth/presentation/authorization_page.dart' as _i1;
 import 'package:repoviewr/auth/presentation/sign_in_page.dart' as _i4;
-import 'package:repoviewr/github/core/domain/github_repo.dart' as _i9;
+import 'package:repoviewr/github/detail/presentation/repo_detail_page.dart'
+    as _i2;
 import 'package:repoviewr/github/repos/searched_repos/presentation/searched_repos_page.dart'
     as _i3;
-import 'package:repoviewr/github/repos/starred_repos/presentation/repo_description_page.dart'
-    as _i2;
 import 'package:repoviewr/github/repos/starred_repos/presentation/starred_repos_page.dart'
     as _i6;
 import 'package:repoviewr/splash/presentation/splash_page.dart' as _i5;
@@ -38,13 +37,15 @@ abstract class $AppRouter extends _i7.RootStackRouter {
         ),
       );
     },
-    RepoDescriptionRoute.name: (routeData) {
-      final args = routeData.argsAs<RepoDescriptionRouteArgs>();
+    RepoDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<RepoDetailRouteArgs>();
       return _i7.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i2.RepoDescriptionPage(
+        child: _i2.RepoDetailPage(
           key: args.key,
-          repo: args.repo,
+          fullRepoName: args.fullRepoName,
+          imageUrl: args.imageUrl,
+          repoName: args.repoName,
         ),
       );
     },
@@ -124,40 +125,50 @@ class AuthorizationRouteArgs {
 }
 
 /// generated route for
-/// [_i2.RepoDescriptionPage]
-class RepoDescriptionRoute extends _i7.PageRouteInfo<RepoDescriptionRouteArgs> {
-  RepoDescriptionRoute({
+/// [_i2.RepoDetailPage]
+class RepoDetailRoute extends _i7.PageRouteInfo<RepoDetailRouteArgs> {
+  RepoDetailRoute({
     _i8.Key? key,
-    required _i9.GithubRepo repo,
+    required String fullRepoName,
+    required String imageUrl,
+    required String repoName,
     List<_i7.PageRouteInfo>? children,
   }) : super(
-          RepoDescriptionRoute.name,
-          args: RepoDescriptionRouteArgs(
+          RepoDetailRoute.name,
+          args: RepoDetailRouteArgs(
             key: key,
-            repo: repo,
+            fullRepoName: fullRepoName,
+            imageUrl: imageUrl,
+            repoName: repoName,
           ),
           initialChildren: children,
         );
 
-  static const String name = 'RepoDescriptionRoute';
+  static const String name = 'RepoDetailRoute';
 
-  static const _i7.PageInfo<RepoDescriptionRouteArgs> page =
-      _i7.PageInfo<RepoDescriptionRouteArgs>(name);
+  static const _i7.PageInfo<RepoDetailRouteArgs> page =
+      _i7.PageInfo<RepoDetailRouteArgs>(name);
 }
 
-class RepoDescriptionRouteArgs {
-  const RepoDescriptionRouteArgs({
+class RepoDetailRouteArgs {
+  const RepoDetailRouteArgs({
     this.key,
-    required this.repo,
+    required this.fullRepoName,
+    required this.imageUrl,
+    required this.repoName,
   });
 
   final _i8.Key? key;
 
-  final _i9.GithubRepo repo;
+  final String fullRepoName;
+
+  final String imageUrl;
+
+  final String repoName;
 
   @override
   String toString() {
-    return 'RepoDescriptionRouteArgs{key: $key, repo: $repo}';
+    return 'RepoDetailRouteArgs{key: $key, fullRepoName: $fullRepoName, imageUrl: $imageUrl, repoName: $repoName}';
   }
 }
 

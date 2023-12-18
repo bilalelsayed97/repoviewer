@@ -18,8 +18,10 @@ class RepoDetailRemoteService {
   );
 
   Future<RemoteResponse<String>> getReadmeHtml(String fullRepoName) async {
-    final requestUri =
-        Uri.https('api.github.com', '/repos/$fullRepoName/readme');
+    final requestUri = Uri.https(
+      'api.github.com',
+      '/repos/$fullRepoName/readme',
+    );
 
     final previousHeaders = await _headersCache.getHeaders(requestUri);
 
@@ -74,7 +76,7 @@ class RepoDetailRemoteService {
 
       if (response.statusCode == 204) {
         return true;
-      } else if (response.statusCode == 204) {
+      } else if (response.statusCode == 404) {
         return false;
       } else {
         throw RestApiException(response.statusCode);

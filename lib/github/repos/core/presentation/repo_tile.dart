@@ -46,8 +46,10 @@ class RepoTile extends StatelessWidget {
         ],
       ),
       onTap: () {
-        AutoRouter.of(context).push(RepoDescriptionRoute(repo: repo));
-        //TODO:navigate to page details
+        AutoRouter.of(context).push(RepoDetailRoute(
+            fullRepoName: repo.fullName,
+            imageUrl: repo.owner.avatarUrlSmall,
+            repoName: repo.name));
       },
     );
   }

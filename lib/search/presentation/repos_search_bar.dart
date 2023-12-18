@@ -4,6 +4,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
+import 'package:repoviewr/core/Utility/assets_data.dart';
+import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
 import 'package:repoviewr/search/application/search_history_cubit/search_history_cubit.dart';
 
 class ReposSearchBar extends StatefulWidget {
@@ -45,14 +47,20 @@ class _ReposSearchBarState extends State<ReposSearchBar> {
   Widget build(BuildContext context) {
     return FloatingSearchBar(
       leadingActions: [
-        IconButton(
-            onPressed: () {
-              AutoRouter.of(context).pop();
-            },
-            icon: (AutoRouter.of(context).canPop() &&
-                    (Platform.isIOS || Platform.isMacOS))
-                ? const Icon(Icons.arrow_back_ios)
-                : const Icon(Icons.arrow_back))
+        Image.asset(
+          AssetsData.ocat2,
+          height: context.ww * 0.1,
+        ),
+        AutoRouter.of(context).canPop()
+            ? IconButton(
+                onPressed: () {
+                  AutoRouter.of(context).pop();
+                },
+                icon: (AutoRouter.of(context).canPop() &&
+                        (Platform.isIOS || Platform.isMacOS))
+                    ? const Icon(Icons.arrow_back_ios)
+                    : const Icon(Icons.arrow_back))
+            : const SizedBox(),
       ],
       automaticallyImplyBackButton: false,
       controller: _controller,

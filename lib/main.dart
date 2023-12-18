@@ -5,6 +5,7 @@ import 'package:repoviewr/core/infrastructure/sembast_database.dart';
 import 'package:repoviewr/core/shared/providers.dart';
 import 'package:repoviewr/core/observer/block_observer.dart';
 import 'package:repoviewr/core/presentation/app_widget.dart';
+import 'package:repoviewr/github/detail/application/repo_detail_cubit/repo_detail_cubit.dart';
 import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
 import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
@@ -32,6 +33,9 @@ void main() async {
       ),
       BlocProvider<SearchHistoryCubit>(
         create: (context) => getIt.get<SearchHistoryCubit>(),
+      ),
+      BlocProvider<RepoDetailCubit>(
+        create: (context) => getIt.get<RepoDetailCubit>(),
       ),
     ],
     child: const AppWidget(),
