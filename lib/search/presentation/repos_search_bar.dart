@@ -12,6 +12,7 @@ class ReposSearchBar extends StatefulWidget {
   final String title;
   final String hint;
   final Widget body;
+  final bool canPop;
 
   final void Function(String searchTerm) onShouldNavigateToResultPage;
   final void Function() onSignOutButtonPressed;
@@ -22,7 +23,8 @@ class ReposSearchBar extends StatefulWidget {
       required this.hint,
       required this.body,
       required this.onShouldNavigateToResultPage,
-      required this.onSignOutButtonPressed});
+      required this.onSignOutButtonPressed,
+      required this.canPop});
 
   @override
   State<ReposSearchBar> createState() => _ReposSearchBarState();
@@ -51,7 +53,7 @@ class _ReposSearchBarState extends State<ReposSearchBar> {
           AssetsData.ocat2,
           height: context.ww * 0.1,
         ),
-        AutoRouter.of(context).canPop()
+        widget.canPop
             ? IconButton(
                 onPressed: () {
                   AutoRouter.of(context).pop();
@@ -71,13 +73,15 @@ class _ReposSearchBarState extends State<ReposSearchBar> {
         children: [
           Text(
             widget.title,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
             style: const TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 18,
             ),
           ),
           const Text(
-            'Tap to search 👆🏻',
+            'Tap to search',
             style: TextStyle(color: Colors.grey),
           )
         ],

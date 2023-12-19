@@ -12,6 +12,7 @@ import 'package:auto_route/auto_route.dart' as _i7;
 import 'package:flutter/material.dart' as _i8;
 import 'package:repoviewr/auth/presentation/authorization_page.dart' as _i1;
 import 'package:repoviewr/auth/presentation/sign_in_page.dart' as _i4;
+import 'package:repoviewr/github/core/domain/github_repo.dart' as _i9;
 import 'package:repoviewr/github/detail/presentation/repo_detail_page.dart'
     as _i2;
 import 'package:repoviewr/github/repos/searched_repos/presentation/searched_repos_page.dart'
@@ -43,9 +44,7 @@ abstract class $AppRouter extends _i7.RootStackRouter {
         routeData: routeData,
         child: _i2.RepoDetailPage(
           key: args.key,
-          fullRepoName: args.fullRepoName,
-          imageUrl: args.imageUrl,
-          repoName: args.repoName,
+          repo: args.repo,
         ),
       );
     },
@@ -129,17 +128,13 @@ class AuthorizationRouteArgs {
 class RepoDetailRoute extends _i7.PageRouteInfo<RepoDetailRouteArgs> {
   RepoDetailRoute({
     _i8.Key? key,
-    required String fullRepoName,
-    required String imageUrl,
-    required String repoName,
+    required _i9.GithubRepo repo,
     List<_i7.PageRouteInfo>? children,
   }) : super(
           RepoDetailRoute.name,
           args: RepoDetailRouteArgs(
             key: key,
-            fullRepoName: fullRepoName,
-            imageUrl: imageUrl,
-            repoName: repoName,
+            repo: repo,
           ),
           initialChildren: children,
         );
@@ -153,22 +148,16 @@ class RepoDetailRoute extends _i7.PageRouteInfo<RepoDetailRouteArgs> {
 class RepoDetailRouteArgs {
   const RepoDetailRouteArgs({
     this.key,
-    required this.fullRepoName,
-    required this.imageUrl,
-    required this.repoName,
+    required this.repo,
   });
 
   final _i8.Key? key;
 
-  final String fullRepoName;
-
-  final String imageUrl;
-
-  final String repoName;
+  final _i9.GithubRepo repo;
 
   @override
   String toString() {
-    return 'RepoDetailRouteArgs{key: $key, fullRepoName: $fullRepoName, imageUrl: $imageUrl, repoName: $repoName}';
+    return 'RepoDetailRouteArgs{key: $key, repo: $repo}';
   }
 }
 

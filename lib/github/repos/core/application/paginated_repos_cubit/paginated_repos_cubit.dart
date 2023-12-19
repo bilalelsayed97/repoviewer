@@ -21,12 +21,15 @@ class PaginatedReposCubit extends Cubit<PaginatedReposState> {
     return _page;
   }
 
-  Future<void> getNextPage(RepositoryGetter getter,
-      {bool isNewSearch = false}) async {
-    if (isNewSearch) {
-      emit(LoadSuccess(Fresh.yes([]), isNextPageAvailable: true));
-      isNewSearch = false;
-    }
+  @protected
+  void resetState() {
+    _page = 1;
+    emit(PaginatedReposState.initial(Fresh.yes([])));
+  }
+
+  Future<void> getNextPage(
+    RepositoryGetter getter,
+  ) async {
     emit(Loading(state.repos, PaginationConfig.itemsPerPage));
     final response = await getter(_page);
     response.fold((failure) {

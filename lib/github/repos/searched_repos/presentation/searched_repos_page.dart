@@ -4,15 +4,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_floating_search_bar_2/material_floating_search_bar_2.dart';
 import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
 import 'package:repoviewr/core/presentation/routes/app_router.gr.dart';
-import 'package:repoviewr/github/repos/core/application/paginated_repos_cubit/paginated_repos_cubit.dart';
 import 'package:repoviewr/github/repos/core/presentation/paginated_repo_list_view.dart';
 import 'package:repoviewr/github/repos/searched_repos/application/searched_repos_cubit/searched_repos_cubit.dart';
 import 'package:repoviewr/search/presentation/repos_search_bar.dart';
 
 @RoutePage()
 class SearchedReposPage extends StatefulWidget {
-  final String query;
   const SearchedReposPage({super.key, required this.query});
+
+  final String query;
 
   @override
   State<SearchedReposPage> createState() => _SearchedReposPageState();
@@ -23,9 +23,8 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      BlocProvider.of<SearchedReposCubit>(context).getNextSearchedReposPage(
-          widget.query, BlocProvider.of<PaginatedReposCubit>(context).page,
-          isNewSearch: true);
+      BlocProvider.of<SearchedReposCubit>(context)
+          .getFirstSearchedReposPage(widget.query);
     });
   }
 
@@ -34,6 +33,7 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
     return Scaffold(
       extendBodyBehindAppBar: false,
       body: ReposSearchBar(
+        canPop: true,
         hint: 'Search all repositories...',
         title: widget.query,
         onShouldNavigateToResultPage: (query) {
@@ -53,9 +53,7 @@ class _SearchedReposPageState extends State<SearchedReposPage> {
             isSearch: true,
             getNextPage: (context) {
               BlocProvider.of<SearchedReposCubit>(context)
-                  .getNextSearchedReposPage(widget.query,
-                      BlocProvider.of<PaginatedReposCubit>(context).page,
-                      isNewSearch: false);
+                  .getNextSearchedReposPage(widget.query);
             },
           ),
         ),

@@ -5,9 +5,16 @@ class SearchedReposCubit extends PaginatedReposCubit {
   final SearchedReposRepository _repository;
   SearchedReposCubit(this._repository);
 
-  Future getNextSearchedReposPage(String query, int page,
-      {required bool isNewSearch}) async {
-    super.getNextPage((page) => _repository.getSearchedReposPage(query, page),
-        isNewSearch: isNewSearch);
+  Future<void> getFirstSearchedReposPage(String query) async {
+    super.resetState();
+    await getNextSearchedReposPage(query);
+  }
+
+  Future<void> getNextSearchedReposPage(
+    String query,
+  ) async {
+    super.getNextPage(
+      (page) => _repository.getSearchedReposPage(query, page),
+    );
   }
 }

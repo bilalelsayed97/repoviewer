@@ -16,16 +16,18 @@ class RepoTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      leading: CircleAvatar(
-        radius: context.ww * 0.065,
-        backgroundColor: Colors.white,
-        child: ClipRRect(
-          clipBehavior: Clip.hardEdge,
-          borderRadius: BorderRadius.circular(300),
-          child: CachedNetworkImage(
-            imageUrl: repo.owner.avatarUrlSmall,
-            placeholder: (context, url) => const LoadingIndicator(),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+      leading: Hero(tag: repo.fullName,
+        child: CircleAvatar(
+          radius: context.ww * 0.065,
+          backgroundColor: Colors.white,
+          child: ClipRRect(
+            clipBehavior: Clip.hardEdge,
+            borderRadius: BorderRadius.circular(300),
+            child: CachedNetworkImage(
+              imageUrl: repo.owner.avatarUrlSmall,
+              placeholder: (context, url) => const LoadingIndicator(),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
         ),
       ),
@@ -46,10 +48,7 @@ class RepoTile extends StatelessWidget {
         ],
       ),
       onTap: () {
-        AutoRouter.of(context).push(RepoDetailRoute(
-            fullRepoName: repo.fullName,
-            imageUrl: repo.owner.avatarUrlSmall,
-            repoName: repo.name));
+        AutoRouter.of(context).push(RepoDetailRoute(repo: repo));
       },
     );
   }

@@ -31,6 +31,7 @@ class _StarredReposPageState extends State<StarredReposPage> {
     return Scaffold(
       extendBodyBehindAppBar: false,
       body: ReposSearchBar(
+        canPop: false,
         onSignOutButtonPressed: () {
           showDialog(
               barrierColor: Colors.black.withOpacity(.5),
@@ -102,57 +103,4 @@ class _StarredReposPageState extends State<StarredReposPage> {
       ),
     );
   }
-}
-
-IconButton _logOut(BuildContext context) {
-  return IconButton(
-      onPressed: () {
-        showDialog(
-            barrierColor: Colors.black.withOpacity(.5),
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: const Row(
-                  children: [
-                    Icon(Icons.logout),
-                    SizedBox(width: 16),
-                    Text('Sign out ...'),
-                  ],
-                ),
-                content: const Text('Confirm to sign out.'),
-                elevation: 1,
-                shadowColor: Colors.black,
-                backgroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24)),
-                actions: [
-                  MaterialButton(
-                    onPressed: () async {
-                      Navigator.pop(context, true);
-                    },
-                    child: const Text('Confrim',
-                        style: TextStyle(color: Colors.red)),
-                  ),
-                  MaterialButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    child: const Text('Back'),
-                  ),
-                ],
-              );
-            }).then((value) async {
-          if (value) {
-            await BlocProvider.of<AuthCubit>(context).signOut().then((value) {
-              if (context.mounted) {
-                AutoRouter.of(context).pushAndPopUntil(const SignInRoute(),
-                    predicate: (_) {
-                  return false;
-                });
-              }
-            });
-          }
-        });
-      },
-      icon: const Icon(Icons.logout_outlined));
 }

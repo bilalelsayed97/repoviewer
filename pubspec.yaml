@@ -32,17 +32,17 @@ dependencies:
   json_annotation: ^4.8.1
   material_design_icons_flutter: ^7.0.7296
   material_floating_search_bar: ^0.3.7
+  material_floating_search_bar_2:
+    git:
+      url: https://github.com/bilalelsayed97/material_floating_search_bar.git
   oauth2: ^2.0.2
   path: ^1.8.3
   path_provider: ^2.1.1
   sembast: ^3.5.0+1
   shimmer: ^3.0.0
   svg_flutter: ^0.0.1
-  url_launcher: ^6.2.1
+  url_launcher: ^6.2.2
   webview_flutter: ^4.4.2
-  material_floating_search_bar_2:
-    git:
-      url: https://github.com/bilalelsayed97/material_floating_search_bar.git
 dev_dependencies:
   auto_route_generator: ^7.3.2
   build_runner: ^2.4.6

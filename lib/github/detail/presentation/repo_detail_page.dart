@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
@@ -6,19 +8,20 @@ import 'package:gap/gap.dart';
 import 'package:repoviewr/core/Utility/assets_data.dart';
 import 'package:repoviewr/core/Utility/mediaquery_helper.dart';
 import 'package:repoviewr/core/presentation/loading_indicator.dart';
+import 'package:repoviewr/core/presentation/toasts.dart';
+import 'package:repoviewr/github/core/domain/github_repo.dart';
+import 'package:repoviewr/github/core/presentation/no_results_display.dart';
 import 'package:repoviewr/github/detail/application/repo_detail_cubit/repo_detail_cubit.dart';
+import 'package:repoviewr/github/repos/starred_repos/application/starred_repos_cubit/starred_repos_cubit.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:url_launcher/url_launcher.dart' as url_launcher;
 
 @RoutePage()
 class RepoDetailPage extends StatefulWidget {
-  final String fullRepoName;
-  final String imageUrl;
-  final String repoName;
-  RepoDetailPage(
-      {super.key,
-      required this.fullRepoName,
-      required this.imageUrl,
-      required this.repoName});
+  final GithubRepo repo;
+
+  const RepoDetailPage({super.key, required this.repo});
 
   @override
   State<RepoDetailPage> createState() => _RepoDetailPageState();
@@ -28,56 +31,95 @@ class _RepoDetailPageState extends State<RepoDetailPage> {
   @override
   void initState() {
     super.initState();
+
     Future.microtask(() => BlocProvider.of<RepoDetailCubit>(context)
-        .getRepoDetail(widget.fullRepoName));
+        .getRepoDetail(widget.repo.fullName));
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<RepoDetailCubit, RepoDetailState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        state.maybeMap(
+            orElse: () {},
+            success: (_) {
+              if (!_.repoDetail.isFresh) {
+                showNoConnectionToast(
+                    "You're not online. Some information may be outdated.");
+              }
+            });
+      },
       builder: (context, state) {
         return Scaffold(
-          appBar: state.maybeMap(orElse: () {
-            return null;
-          }, success: (_) {
-            return AppBar(
-              title: Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.imageUrl),
+          appBar: AppBar(
+            leading: IconButton(
+                onPressed: () {
+                  state.hasStarredStatusChanged == true
+                      ? AutoRouter.of(context).pop().then((value) =>
+                          BlocProvider.of<StarredReposCubit>(context)
+                              .getFirstStarredReposPage())
+                      : AutoRouter.of(context).pop();
+                },
+                icon: !Platform.isAndroid
+                    ? const Icon(Icons.arrow_back_ios)
+                    : const Icon(Icons.arrow_back)),
+            title: Row(
+              children: [
+                Hero(
+                  tag: widget.repo.fullName,
+                  child: CircleAvatar(
+                    backgroundColor: Colors.white,
+                    backgroundImage:
+                        NetworkImage(widget.repo.owner.avatarUrlSmall),
                   ),
-                  const Gap(8),
-                  Text(
-                    widget.repoName.toUpperCase(),
+                ),
+                const Gap(8),
+                Flexible(
+                  child: Text(
+                    widget.repo.name,
+                    overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      overflow: TextOverflow.ellipsis,
                       fontSize: 16,
+                      overflow: TextOverflow.ellipsis,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                ],
-              ),
-            );
-          }),
+                ),
+              ],
+            ),
+            actions: [
+              state.maybeMap(orElse: () {
+                return Shimmer.fromColors(
+                  baseColor: Colors.grey.shade400,
+                  highlightColor: Colors.grey.shade300,
+                  child:
+                      const IconButton(onPressed: null, icon: Icon(Icons.star)),
+                );
+              }, success: (successState) {
+                return IconButton(
+                    onPressed: !successState.repoDetail.isFresh
+                        ? null
+                        : () {
+                            BlocProvider.of<RepoDetailCubit>(context)
+                                .switchStarredStatus(
+                                    successState.repoDetail.entity!);
+                          },
+                    icon: !successState.repoDetail.isFresh
+                        ? const Icon(Icons.wifi_off_outlined)
+                        : Icon(successState.repoDetail.entity?.starred == true
+                            ? Icons.star
+                            : Icons.star_outline));
+              }, failure: (_) {
+                return const IconButton(
+                    onPressed: null, icon: Icon(Icons.star));
+              })
+            ],
+          ),
           body: BlocConsumer<RepoDetailCubit, RepoDetailState>(
             listener: (context, state) {},
             builder: (context, state) {
               return state.map(initial: (_) {
-                return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Spacer(),
-                      Image.asset(
-                        AssetsData.ocat1,
-                        width: context.ww * 0.5,
-                      ),
-                      const Spacer(),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 24),
-                        child: LoadingIndicator(),
-                      ),
-                    ]);
+                return Container();
               }, loading: (_) {
                 return Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -106,19 +148,16 @@ class _RepoDetailPageState extends State<RepoDetailPage> {
                       ),
                     ]);
               }, success: (_) {
-                if (_.repoDetail.entity?.html != null) {
+                if (_.repoDetail.entity?.html == null) {
+                  return const NoResultsDisplay(message: 'Not Found');
+                } else {
                   return _RepoDetailPageBody(
                     html: _.repoDetail.entity!.html,
                   );
-                } else {
-                  return Center(
-                    child: Image.asset(AssetsData.error404),
-                  );
                 }
               }, failure: (_) {
-                return Center(
-                  child: Image.asset(AssetsData.error404),
-                );
+                return NoResultsDisplay(
+                    message: 'error ${(_.failure.errorCode.toString())}');
               });
             },
           ),
@@ -130,10 +169,8 @@ class _RepoDetailPageState extends State<RepoDetailPage> {
 
 class _RepoDetailPageBody extends StatefulWidget {
   final _controller = WebViewController();
-
   final String html;
   _RepoDetailPageBody({
-    super.key,
     required this.html,
   });
 
@@ -154,21 +191,25 @@ class _RepoDetailPageBodyState extends State<_RepoDetailPageBody> {
           onPageFinished: (String url) {},
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
-            return NavigationDecision.prevent;
+            if (request.url.startsWith('about:blank')) {
+              return NavigationDecision.navigate;
+            } else {
+              url_launcher.launchUrl(Uri.parse(request.url));
+              return NavigationDecision.prevent;
+            }
           },
         ),
       )
-      ..loadHtmlString(
-        '''
-  <html>
-  <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  </head>
-  <body>${(widget.html)}</body>
-  </html>
-  $css
-''',
-      );
+      ..enableZoom(false)
+      ..loadHtmlString('''
+        <html>
+        <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body>${(widget.html)}</body>
+        </html>
+        $css
+      ''');
     return SafeArea(child: WebViewWidget(controller: widget._controller));
   }
 

@@ -7,7 +7,7 @@ import 'package:sembast/timestamp.dart';
 class RepoDetailLocalService {
   static const cacheSize = 50;
 
-  SembastDatabase _sembastDatabase;
+  final SembastDatabase _sembastDatabase;
   final _store = stringMapStoreFactory.store('repoDetails');
   final GithubHeadersCache _headersCache;
 

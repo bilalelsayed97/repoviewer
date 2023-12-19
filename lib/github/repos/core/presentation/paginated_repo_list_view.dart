@@ -73,7 +73,6 @@ class _PaginatedRepoListViewState extends State<PaginatedRepoListView> {
 class _PaginatedListView extends StatelessWidget {
   final PaginatedReposState state;
   const _PaginatedListView({
-    super.key,
     required this.state,
   });
 

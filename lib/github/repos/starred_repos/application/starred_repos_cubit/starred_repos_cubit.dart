@@ -5,6 +5,11 @@ class StarredReposCubit extends PaginatedReposCubit {
   final StarredReposRepository _repository;
   StarredReposCubit(this._repository);
 
+  Future<void> getFirstStarredReposPage() async {
+    super.resetState();
+    await getNextStarredReposPage();
+  }
+
   getNextStarredReposPage() {
     super.getNextPage((page) => _repository.getStarredReposPage(page));
   }

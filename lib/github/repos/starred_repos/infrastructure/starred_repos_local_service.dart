@@ -20,7 +20,7 @@ class StarredReposLocalService {
 
   Future<List<GithubRepoDTO>> getPage(int page) async {
     final sembastPage = page - 1;
-    final records = await _store.find(await _sembastDatabase.database,
+    final records = await _store.find(_sembastDatabase.database,
         finder: Finder(
           limit: PaginationConfig.itemsPerPage,
           offset: PaginationConfig.itemsPerPage * sembastPage,
@@ -29,7 +29,7 @@ class StarredReposLocalService {
   }
 
   Future<int> getLocalPageCount() async {
-    final repoCount = await _store.count(await _sembastDatabase.database);
+    final repoCount = await _store.count(_sembastDatabase.database);
     return (repoCount / PaginationConfig.itemsPerPage).ceil();
   }
 }

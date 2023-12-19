@@ -9,7 +9,7 @@ part 'repo_detail_state.dart';
 part 'repo_detail_cubit.freezed.dart';
 
 class RepoDetailCubit extends Cubit<RepoDetailState> {
-  RepoDetailRepository _repository;
+  final RepoDetailRepository _repository;
 
   RepoDetailCubit(this._repository) : super(const RepoDetailState.initial());
 
