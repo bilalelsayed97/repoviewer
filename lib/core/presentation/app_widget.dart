@@ -21,6 +21,7 @@ class _AppWidgetState extends State<AppWidget> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+        debugShowCheckedModeBanner: false,
         title: 'Repo Viewer',
         routerConfig: BlocProvider.of<AuthCubit>(context).appRouter.config(),
         theme: themeData);
