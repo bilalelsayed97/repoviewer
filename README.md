@@ -1,7 +1,7 @@
 # Github Repo Viewer 🎉🎉
 
 ![Intro](screenshots/repoviewer.png)
-Complex GitHub client app with all the best practices applied.
+Complex GitHub client app with all the best practices applied made with Flutter.
 
 <div style="display: flex; justify-content: space-between;">
   <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.48.20.png" alt="splash" height="200">
