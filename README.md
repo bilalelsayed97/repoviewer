@@ -1,7 +1,21 @@
-# Github Repos Viewer
+# Github Repo Viewer
 
+![Intro](screenshots/repoviewer.png)
 Complex GitHub client app with all the best practices applied.
-![Example Image](screenshots/repoviewer.png)
+
+<div style="display: flex; justify-content: space-between;">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.48.20.png" alt="splash" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.46.38.png" alt="Signin page" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.47.20.png" alt="Signin page 2" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.46.24.png" alt="starred - home page" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.20.png" alt="first-search" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.40.png" alt="filter-search" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.40.20.png" alt="search-history" height="200">
+    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.51.png" alt="search-results" height="200">
+    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.41.24.png" alt="pagination" height="200">
+    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.46.33.png" alt="signout-confirm" height="200">
+</div>
+
 
 ## Used technologies:
 
