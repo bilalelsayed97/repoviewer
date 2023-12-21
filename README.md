@@ -1,6 +1,7 @@
 # Github Repos Viewer
 
 Complex GitHub client app with all the best practices applied.
+![Example Image](screenshots/repoviewer.png)
 
 ## Used technologies:
 
