@@ -79,7 +79,6 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
 #### Used libraries ✨
 
   🚨 animated_text_kit
-  
   🚨 auto_route
   
   🚨 bloc
