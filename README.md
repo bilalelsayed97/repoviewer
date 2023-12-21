@@ -1,4 +1,4 @@
-# Github Repo Viewer
+# Github Repo Viewer 🎉🎉
 
 ![Intro](screenshots/repoviewer.png)
 Complex GitHub client app with all the best practices applied.
@@ -11,17 +11,17 @@ Complex GitHub client app with all the best practices applied.
   <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.20.png" alt="first-search" height="200">
   <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.40.png" alt="filter-search" height="200">
   <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.40.20.png" alt="search-history" height="200">
-    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.51.png" alt="search-results" height="200">
-    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.41.24.png" alt="pagination" height="200">
-    <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.46.33.png" alt="signout-confirm" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.39.51.png" alt="search-results" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.41.24.png" alt="pagination" height="200">
+  <img src="screenshots/Simulator Screenshot - iPhone 14 Pro Max - 2023-12-19 at 22.46.33.png" alt="signout-confirm" height="200">
 </div>
 
 
-## Used technologies:
+## Used technologies ✨
 
 Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagination, Design Patterns, SOLID Principles, Dependency injection, Responsive.
 
-### In this project
+### In this project ✨
 
 - 🚀 Clean Architecture
     o Commencing development on Repo Viewer, a sophisticated GitHub client app.
@@ -30,7 +30,7 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
   
     o Initiating, covering essential aspects beyond initial expectations.
   
-- 🧑‍💻 OAuth2 Authentication Implementation
+- 🧑‍💻 OAuth2 Authentication Implementation 
   
     o implementing OAuth2 protocol for remote server authentication.
   
@@ -56,7 +56,7 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
   
     o Integration of a user-friendly search functionality into the Repo Viewer app for GitHub repository searches.
   
-- 🧐 WebView Integration and Data Consolidation
+- 🎨 WebView Integration and Data Consolidation
 
  o Incorporation of WebView to display classic HTML content, focusing on the README file of GitHub repositories.
  
@@ -76,76 +76,76 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
   o Implementation of multi-language support (Localization).
   o Mastery of platform-specific functionality through the creation of plugins for Android, iOS, and web platforms using Dart codebase.
 
-#### Used libraries
+#### Used libraries ✨
 
-  animated_text_kit
+  🚨 animated_text_kit
   
-  auto_route
+  🚨 auto_route
   
-  bloc
+  🚨 bloc
   
-  cached_network_image
+  🚨 cached_network_image
   
-  collection
+  🚨 collection
   
-  cupertino_icons
+  🚨 cupertino_icons
   
-  dartz
+  🚨 dartz
   
-  dio
+  🚨 dio
   
-  equatable
+  🚨 equatable
   
-  flash
+  🚨 flash
   
-  flutter_bloc
+  🚨 flutter_bloc
   
-  flutter_secure_storage
+  🚨 flutter_secure_storage
   
-  flutter_spinkit
+  🚨 flutter_spinkit
   
-  fluttertoast
+  🚨 fluttertoast
   
-  freezed_annotation
+  🚨 freezed_annotation
   
-  gap
+  🚨 gap
   
-  get_it
+  🚨 get_it
   
-  http
+  🚨 http
   
-  json_annotation
+  🚨 json_annotation
   
-  material_design_icons_flutter
+  🚨 material_design_icons_flutter
   
-  material_floating_search_bar
+  🚨 material_floating_search_bar
   
-  oauth2
+  🚨 oauth2
   
-  path
+  🚨 path
   
-  path_provider
+  🚨 path_provider
   
-  sembast
+  🚨 sembast
   
-  shimmer
+  🚨 shimmer
   
-  svg_flutter
+  🚨 svg_flutter
   
-  url_launcher
+  🚨 url_launcher
   
-  webview_flutter
+  🚨 webview_flutter
   
-  auto_route_generator
+  🚨 auto_route_generator
   
-  build_runner
+  🚨 build_runner
   
-  flutter_lints
+  🚨 flutter_lints
   
-  freezed
+  🚨 freezed
   
-  json_serializable
+  🚨 json_serializable
 
-##### Contact
+##### Contact ✨
 - [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/)
 - [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
