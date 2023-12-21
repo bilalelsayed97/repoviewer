@@ -80,71 +80,38 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
 
   🚨 animated_text_kit
   🚨 auto_route
-  
   🚨 bloc
-  
   🚨 cached_network_image
-  
   🚨 collection
-  
   🚨 cupertino_icons
-  
   🚨 dartz
-  
   🚨 dio
-  
   🚨 equatable
-  
   🚨 flash
-  
   🚨 flutter_bloc
-  
   🚨 flutter_secure_storage
-  
   🚨 flutter_spinkit
-  
   🚨 fluttertoast
-  
   🚨 freezed_annotation
-  
   🚨 gap
-  
   🚨 get_it
-  
   🚨 http
-  
   🚨 json_annotation
-  
   🚨 material_design_icons_flutter
-  
   🚨 material_floating_search_bar
-  
   🚨 oauth2
-  
   🚨 path
-  
   🚨 path_provider
-  
   🚨 sembast
-  
   🚨 shimmer
-  
   🚨 svg_flutter
-  
   🚨 url_launcher
-  
   🚨 webview_flutter
-  
   🚨 auto_route_generator
-  
   🚨 build_runner
-  
   🚨 flutter_lints
-  
   🚨 freezed
-  
   🚨 json_serializable
 
 ##### Contact ✨
-- [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/)
-- [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
+- [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/) - [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
