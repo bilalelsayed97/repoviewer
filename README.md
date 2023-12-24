@@ -17,11 +17,15 @@ Complex GitHub client app with all the best practices applied made with Flutter.
 </div>
 
 
+
 ## Used technologies ✨
+
 
 Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagination, Design Patterns, SOLID Principles, Dependency injection, Responsive.
 
+
 ### In this project ✨
+
 
 - 🚀 Clean Architecture
     o Commencing development on Repo Viewer, a sophisticated GitHub client app.
