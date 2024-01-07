@@ -82,40 +82,38 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
 
 #### Used libraries ✨
 
-  🚨 animated_text_kit
-  🚨 auto_route
-  🚨 bloc
-  🚨 cached_network_image
-  🚨 collection
-  🚨 cupertino_icons
-  🚨 dartz
-  🚨 dio
-  🚨 equatable
-  🚨 flash
-  🚨 flutter_bloc
-  🚨 flutter_secure_storage
-  🚨 flutter_spinkit
-  🚨 fluttertoast
-  🚨 freezed_annotation
-  🚨 gap
-  🚨 get_it
-  🚨 http
-  🚨 json_annotation
-  🚨 material_design_icons_flutter
-  🚨 material_floating_search_bar
-  🚨 oauth2
-  🚨 path
-  🚨 path_provider
-  🚨 sembast
-  🚨 shimmer
-  🚨 svg_flutter
-  🚨 url_launcher
-  🚨 webview_flutter
-  🚨 auto_route_generator
-  🚨 build_runner
-  🚨 flutter_lints
-  🚨 freezed
-  🚨 json_serializable
+-[animated_text_kit]()
+-[auto_route]()
+-[bloc]()
+-[cached_network_image]()
+-[collection]()
+-[dartz]()
+-[equatable]()
+-[dio]()
+-[flash]()
+-[flutter_bloc]()
+-[flutter_secure_storage](url)
+-[flutter_spinkit](url) 
+-[fluttertoast](url)
+-[freezed_annotation](url) 
+-[gap](url)
+-[get_it](url) 
+-[http](url)
+-[json_annotation](url) 
+-[material_floating_search_bar](url)
+-[oauth2](url)
+-[path](url) 
+-[path_provider](url) 
+-[sembast](url) 
+-[shimmer](url)
+-[svg_flutter](url) 
+-[url_launcher](url)
+-[webview_flutter](url) 
+-[auto_route_generator](url)
+-[build_runner](url) 
+-[flutter_lints](url)
+-[freezed](url)
+-[json_serializable](url)
 
 ##### Contact ✨
 - [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/) - [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
