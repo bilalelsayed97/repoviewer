@@ -82,69 +82,69 @@ Flutter, Dart, Figma, REST API, OAuth, Bloc, Clean Architecture, Caching , pagin
 
 #### Used libraries ✨
 
--[animated_text_kit]()
+- [animated_text_kit]()
 
--[auto_route]()
+- [auto_route]()
 
--[bloc]()
+- [bloc]()
 
--[cached_network_image]()
+- [cached_network_image]()
 
--[collection]()
+- [collection]()
 
--[dartz]()
+- [dartz]()
 
--[equatable]()
+- [equatable]()
 
--[dio]()
+- [dio]()
 
--[flash]()
+- [flash]()
 
--[flutter_bloc]()
+- [flutter_bloc]()
 
--[flutter_secure_storage](url)
+- [flutter_secure_storage](url)
 
--[flutter_spinkit](url) 
+- [flutter_spinkit](url) 
 
--[fluttertoast](url)
+- [fluttertoast](url)
 
--[freezed_annotation](url) 
+- [freezed_annotation](url) 
 
--[gap](url)
+- [gap](url)
 
--[get_it](url) 
+- [get_it](url) 
 
--[http](url)
+- [http](url)
 
--[json_annotation](url) 
+- [json_annotation](url) 
 
--[material_floating_search_bar](url)
+- [material_floating_search_bar](url)
 
--[oauth2](url)
+- [oauth2](url)
 
--[path](url) 
+- [path](url) 
 
--[path_provider](url) 
+- [path_provider](url) 
 
--[sembast](url) 
+- [sembast](url) 
 
--[shimmer](url)
+- [shimmer](url)
 
--[svg_flutter](url) 
+- [svg_flutter](url) 
 
--[url_launcher](url)
+- [url_launcher](url)
 
--[webview_flutter](url) 
+- [webview_flutter](url) 
 
--[auto_route_generator](url)
+- [auto_route_generator](url)
 
--[build_runner](url) 
+- [build_runner](url) 
 
--[flutter_lints](url)
+- [flutter_lints](url)
 
--[freezed](url)
+- [freezed](url)
 
--[json_serializable](url)
+- [json_serializable](url)
 
 ##### Contact ✨
 - [LinkedIn](https://www.linkedin.com/in/bilalelsayed97/) - [Upwork](https://www.upwork.com/freelancers/~01029ea233c076dce6)
